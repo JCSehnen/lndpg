@@ -1,4 +1,4 @@
- :root {
+:root {
       --primary-color: #58a6ff; /* Azul vibrante para destaque */
       --secondary-color: #8b949e; /* Cinza para texto secundário */
       --background-light: #0d1117; /* Fundo escuro principal */
@@ -134,26 +134,26 @@
     }
 
     #sobre-mim::before {
-      background-image: url('https://placehold.co/1920x1080/0d1117/161b22?text=Abstract+Code+Pattern'); /*  */
+      background-image: url('https://placehold.co/1920x1080/0d1117/161b22?text=Abstract+Code+Pattern'); /* */
       background-size: 200px; /* Padrão repetitivo menor */
       opacity: 0.02;
     }
 
     #habilidades::before {
-      background-image: url('https://placehold.co/1920x1080/0d1117/161b22?text=Circuit+Board+Pattern'); /*  */
+      background-image: url('https://placehold.co/1920x1080/0d1117/161b22?text=Circuit+Board+Pattern'); /* */
       background-size: 300px;
       opacity: 0.02;
     }
 
     #projetos::before {
-      background-image: url('https://placehold.co/1920x1080/0d1117/161b22?text=Geometric+Shapes+Pattern'); /*  */
+      background-image: url('https://placehold.co/1920x1080/0d1117/161b22?text=Geometric+Shapes+Pattern'); /* */
       background-size: 250px;
       opacity: 0.02;
     }
 
     /* Nova seção para Links Úteis/Conecte-se */
     #links-uteis::before {
-      background-image: url('https://placehold.co/1920x1080/161b22/0d1117?text=Social+Connections'); /*  */
+      background-image: url('https://placehold.co/1920x1080/161b22/0d1117?text=Social+Connections'); /* */
       background-size: cover;
       opacity: 0.05;
     }
@@ -238,59 +238,165 @@
     }
 
 
-    /* Projetos */
-    #projetos .projetos-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajusta min-width */
-      gap: 25px; /* Aumenta o espaçamento */
-      margin-top: 30px;
-    }
-
-    .projeto {
-      background-color: var(--background-light);
+    /* Estilos para a simulação de IDE */
+    .code-simulation-wrapper {
+      background-color: #1e1e1e; /* Cor de fundo de IDE */
+      border-radius: 0.5rem;
+      overflow: hidden;
+      margin: 2rem auto;
+      min-width: 100%; /* Ocupa 80% da largura da tela */
+      max-width: 100%; /* Largura máxima fixa */
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
       border: 1px solid var(--border-color);
-      padding: 25px; /* Mais padding */
-      border-radius: 12px; /* Mais arredondado */
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 4px 10px var(--shadow-light);
-      display: flex; /* Para centralizar conteúdo se houver */
-      flex-direction: column;
-      justify-content: space-between; /* Espaçamento entre título e parágrafo */
     }
 
-    .projeto:hover {
-      transform: translateY(-8px); /* Efeito de elevação mais pronunciado */
-      box-shadow: 0 8px 20px var(--shadow-medium);
-      border-color: var(--primary-color); /* Borda destaca no hover */
+    .code-header {
+      display: flex;
+      padding: 0.75rem;
+      background-color: #333;
+      border-bottom: 1px solid #444;
+      gap: 0.5rem;
     }
 
-    .projeto h3 {
-      color: var(--primary-color);
-      font-size: 1.6rem; /* Aumenta o tamanho do título do projeto */
-      margin-bottom: 10px;
-      font-weight: 700;
-      text-align: center; /* Centraliza o título do projeto */
+    .code-header span {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
     }
 
-    .projeto p {
-      color: var(--secondary-color);
+    .code-header span:nth-child(1) { background-color: #ff5f56; } /* Red */
+    .code-header span:nth-child(2) { background-color: #ffbd2e; } /* Yellow */
+    .code-header span:nth-child(3) { background-color: #27c93f; } /* Green */
+
+    pre {
+      margin: 0;
+      padding: 1.5rem;
+      text-align: left;
+      white-space: pre-wrap; /* Permite quebras de linha */
+      word-wrap: break-word; /* Quebra palavras longas */
+      font-family: 'Fira Code', 'Cascadia Code', monospace; /* Fonte de código */
       font-size: 1rem;
-      line-height: 1.7;
-      text-align: left; /* Mantém o texto do projeto alinhado à esquerda */
-      margin-bottom: 15px; /* Adiciona margem abaixo do parágrafo */
+      color: #d4d4d4; /* Cor de texto mais clara para o código (VS Code like) */
+      min-height: 200px; /* Altura mínima */
+      max-height: 400px; /* Altura máxima fixa */
+      overflow-y: auto; /* Adiciona scroll se o conteúdo exceder a altura máxima */
+      background-color: #1e1e1e; /* Mesma cor de fundo do wrapper */
+      position: relative;
     }
 
-    .projeto img {
-      width: 100%; /* Imagem ocupa 100% da largura do contêiner */
-      height: auto; /* Altura automática para manter proporção */
-      border-radius: 8px; /* Cantos arredondados para a imagem */
-      margin-bottom: 15px; /* Espaço entre imagem e texto */
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Sombra para a imagem */
-      transition: transform 0.3s ease;
+    /* Estilo para as linhas de comentário no código */
+    pre code .comment {
+      color: #6a9955; /* Cor verde para comentários (VS Code like) */
     }
 
-    .projeto img:hover {
-      transform: scale(1.02); /* Pequeno zoom no hover da imagem */
+    /* Estilo para palavras-chave (ex: function, return, console) */
+    pre code .keyword {
+      color: #569cd6; /* Cor azul para palavras-chave (VS Code like) */
+    }
+
+    /* Estilo para nomes de funções/variáveis */
+    pre code .function-name {
+        color: #dcdcaa; /* Cor amarela para nomes de funções (VS Code like) */
+    }
+
+    /* Estilo para strings */
+    pre code .string {
+      color: #ce9178; /* Cor laranja para strings (VS Code like) */
+    }
+
+    /* Estilo para números/literais */
+    pre code .number {
+      color: #b5cea8; /* Cor verde claro para números (VS Code like) */
+    }
+
+    code {
+      display: block;
+    }
+
+    /* Cursor piscante */
+    code.typing-cursor::after {
+      content: '|'; /* O caractere do cursor */
+      display: inline-block;
+      animation: blink-caret 0.75s step-end infinite;
+      color: var(--accent-color);
+      margin-left: 2px; /* Pequeno espaço entre o texto e o cursor */
+    }
+
+    @keyframes blink-caret {
+      from, to { opacity: 0; }
+      50% { opacity: 1; }
+    }
+
+    /* Status de compilação */
+    .compilation-status {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      opacity: 0; /* Inicialmente invisível */
+      transition: opacity 1s ease-in-out;
+    }
+
+    .compilation-status.visible {
+      opacity: 1;
+    }
+
+    .gear-icon {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 1rem;
+      animation: spin 4s linear infinite;
+      color: var(--accent-color); /* Cor de acento para a engrenagem */
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    #status-text {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      section {
+        padding: 2rem 1rem;
+      }
+      h2 {
+        font-size: 1.8rem;
+      }
+      pre {
+        padding: 1rem;
+        font-size: 0.9rem;
+        max-height: 300px; /* Ajuste para telas menores */
+      }
+      .gear-icon {
+        width: 50px;
+        height: 50px;
+      }
+      #status-text {
+        font-size: 1.2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h2 {
+        font-size: 1.5rem;
+      }
+      pre {
+        font-size: 0.8rem;
+        max-height: 250px; /* Ajuste para telas muito pequenas */
+      }
+      .gear-icon {
+        width: 40px;
+        height: 40px;
+      }
+      #status-text {
+        font-size: 1rem;
+      }
     }
 
     /* Informações Extras (Aside) */
@@ -314,7 +420,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('https://placehold.co/1920x1080/161b22/0d1117?text=Social+Connections'); /*  */
+      background-image: url('https://placehold.co/1920x1080/161b22/0d1117?text=Social+Connections'); /* */
       background-size: cover;
       background-position: center;
       opacity: 0.05; /* Opacidade sutil */
@@ -431,15 +537,6 @@
       #habilidades li {
         padding: 10px 15px;
       }
-      #projetos .projetos-grid {
-        grid-template-columns: 1fr; /* Uma coluna em telas menores */
-      }
-      .projeto {
-        padding: 20px;
-      }
-      .projeto h3 {
-        font-size: 1.4rem;
-      }
       aside {
         padding: 30px 20px;
       }
@@ -481,9 +578,6 @@
       }
       #habilidades li {
         padding: 8px 12px;
-      }
-      .projeto h3 {
-        font-size: 1.2rem;
       }
       aside {
         padding: 25px 15px;
