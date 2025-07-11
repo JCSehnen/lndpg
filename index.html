@@ -8,6 +8,7 @@
   <!-- Font Awesome para os ícones -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="style.css">
+  <script src="./script.js" defer></script> <!-- Adicionado 'defer' para garantir que o HTML seja carregado primeiro -->
 </head>
 <body>
 
@@ -69,27 +70,24 @@
 
    <section id="projetos">
       <div class="container">
-        <h2>Projetos </h2>
-        <div class="projetos-grid">
-          <div class="projeto">
-            <!-- Imagem de placeholder para o projeto Gestor TI Foz. Substitua pela sua imagem real. -->
-            <img src="https://placehold.co/600x400/161b22/58a6ff?text=Gestor+TI+Foz+Screenshot" alt="Screenshot do projeto Gestor TI Foz" onerror="this.onerror=null; this.src='https://placehold.co/600x400/FF0000/FFFFFF?text=Erro+Carregar+Imagem';">
-            <h3>Gestão de Chamados</h3>
-            <p>Sistema web de gerenciamento de chamados técnicos e distribuição de tarefas para equipes de suporte N2.</p>
+        <h2>Projetos</h2>
+
+        <div class="code-simulation-wrapper">
+          <div class="code-header">
+            <span></span>
+            <span></span>
+            <span></span>
           </div>
-          <div class="projeto">
-            <!-- Imagem de placeholder para o projeto OCS Inventory Dashboard. Substitua pela sua imagem real. -->
-            <img src="https://placehold.co/600x400/161b22/58a6ff?text=OCS+Dashboard+Screenshot" alt="Screenshot do projeto OCS Inventory Dashboard" onerror="this.onerror=null; this.src='https://placehold.co/600x400/FF0000/FFFFFF?text=Erro+Carregar+Imagem';">
-            <h3>OCS Inventory Dashboard</h3>
-            <p>Interface moderna para visualização e controle de inventário de computadores com integração ao sistema OCS.</p>
-          </div>
-          <div class="projeto">
-            <!-- Imagem de placeholder para o projeto App Toner Request. Substitua pela sua imagem real. -->
-            <img src="https://placehold.co/600x400/161b22/58a6ff?text=App+Toner+Request+Screenshot" alt="Screenshot do projeto App Toner Request" onerror="this.onerror=null; this.src='https://placehold.co/600x400/FF0000/FFFFFF?text=Erro+Carregar+Imagem';">
-            <h3>Abertura de Chamados</h3>
-            <p>Extensão de navegador para facilitar a abertura de chamados, com inserção automática de texto.</p>
-          </div>
+          <pre><code id="code-output"></code></pre>
         </div>
+
+        <div class="compilation-status">
+          <svg class="gear-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.837-2.765.6-1.487 1.857a1.532 1.532 0 01-.948 2.286c-1.56.38-1.56 2.6 0 2.98a1.532 1.532 0 01.948 2.286c-.837 1.372.6 2.765 1.857 1.487a1.532 1.532 0 012.286.948c.38 1.56 2.6 1.56 2.98 0a1.532 1.532 0 012.286-.948c1.372.837 2.765-.6 1.487-1.857a1.532 1.532 0 01.948-2.286c1.56-.38 1.56-2.6 0-2.98a1.532 1.532 0 01-.948-2.286c.837-1.372-.6-2.765-1.857-1.487a1.532 1.532 0 01-2.286-.948zM10 11a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
+          </svg>
+          <p id="status-text"></p>
+        </div>
+
       </div>
     </section>
 
