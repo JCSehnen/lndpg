@@ -1,594 +1,509 @@
+/* VARIABLES & THEME RESET */
 :root {
-      --primary-color: #58a6ff; /* Azul vibrante para destaque */
-      --secondary-color: #8b949e; /* Cinza para texto secundário */
-      --background-light: #0d1117; /* Fundo escuro principal */
-      --background-dark: #161b22; /* Fundo mais escuro para elementos */
-      --text-light: #c9d1d9; /* Cor de texto clara */
-      --text-dark: #f0f6fc; /* Cor de texto mais clara */
-      --border-color: #30363d; /* Cor de borda */
-      --accent-color: #00ffae; /* Cor de acento (verde/ciano) */
-      --shadow-light: rgba(255, 255, 255, 0.05); /* Sombra clara */
-      --shadow-medium: rgba(0, 0, 0, 0.4); /* Sombra média */
-    }
+  --bg-dark: #0b071a;
+  --panel-bg: rgba(13, 9, 23, 0.85);
+  --border-color: #3d2963;
+  --text-main: #fafafa;
+  --text-muted: #e0dcf0;
+  --accent-cyan: #00f0ff;
+  --accent-pink: #ff0055;
+  --accent-green: #00ff66;
+  
+  /* Paleta Oficial Game Boy DMG-01 */
+  --gb-darkest: #0f380f;
+  --gb-dark: #306230;
+  --gb-light: #8bac0f;
+  --gb-lightest: #9bbc0f;
+}
 
-    /* Estilos globais e reset */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--background-light);
-      color: var(--text-light);
-      scroll-behavior: smooth;
-      line-height: 1.6;
-    }
+body {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
+/* MONITOR CRT EFFECT (SCANLINES) - SUAVIZADO DE 0.25 PARA 0.05 */
+body::after {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.05) 50%), 
+              linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+  z-index: 9999;
+  background-size: 100% 4px, 6px 100%;
+  pointer-events: none;
+}
 
-    /* Estilos do cabeçalho */
-    header {
-      background-color: var(--background-dark);
-      padding: 60px 20px;
-      text-align: center;
-      border-bottom: 1px solid var(--border-color);
-      box-shadow: 0 4px 15px var(--shadow-medium);
-    }
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+}
 
-    header img {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid var(--primary-color);
-      box-shadow: 0 0 20px var(--shadow-medium);
-      margin-bottom: 20px;
-      transition: transform 0.3s ease-in-out;
-    }
+/* HEADER & GAME BOY AVATAR EFFECT */
+header {
+  background: linear-gradient(135deg, #110e18 0%, #170f2c 100%);
+  padding: 40px 20px;
+  text-align: center;
+  border-bottom: 3px solid var(--border-color);
+}
 
-    header img:hover {
-      transform: scale(1.05);
-    }
+.avatar-gameboy {
+  display: inline-block;
+  width: 130px;
+  height: 130px;
+  position: relative;
+  /* Alterado para um fundo escuro neutro para não interferir nas cores da foto */
+  background-color: #170f2c; 
+  border: 4px solid var(--border-color);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+  margin-bottom: 15px;
+  overflow: hidden;
+}
 
-    header h1 {
-      font-size: 2.8rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-      color: var(--text-dark); /* Nome mais claro */
-    }
+/* Textura pixelada em cima da foto simulando LCD antigo */
+/* .avatar-gameboy::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-image: linear-gradient(rgba(0,0,0,0.15) 50%, transparent 50%),
+                    linear-gradient(90deg, rgba(0,0,0,0.15) 50%, transparent 50%);
+  background-size: 2px 2px;
+  pointer-events: none;
+  z-index: 2;
+} */
 
-    header q {
-      font-size: 1.2rem;
-      color: var(--secondary-color);
-      max-width: 600px;
-      margin: 0 auto;
-      display: block; /* Para aplicar margin auto */
-      font-style: italic;
-    }
+.avatar-gameboy img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  /* Filtros para simular o threshold e canais monocromáticos do Game Boy */
 
-    /* Navegação fixa */
-    nav.sticky-nav {
-      position: sticky;
-      top: 0;
-      background-color: var(--background-dark);
-      padding: 12px 0;
-      z-index: 1000;
-      box-shadow: 0 2px 8px var(--shadow-medium);
-      border-bottom: 1px solid var(--border-color);
-    }
+  display: block;
+  z-index: 1;
+  position: relative;
+}
 
-    .sticky-nav ul {
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
+header h1 {
+  font-size: 1.8rem;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+}
 
-    .sticky-nav a {
-      color: var(--text-light);
-      text-decoration: none;
-      padding: 8px 14px;
-      border-radius: 6px;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      font-weight: 600;
-    }
+header q {
+  font-style: italic;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
 
-    .sticky-nav a:hover {
-      background-color: var(--primary-color);
-      color: var(--background-dark); /* Texto escuro no hover para contraste */
-    }
+/* STICKY NAVIGATION */
+.sticky-nav {
+  position: sticky;
+  top: 0;
+  background: #0d091a;
+  border-bottom: 2px solid var(--border-color);
+  z-index: 100;
+  padding: 10px 0;
+}
 
-    /* Estilos das Seções (Estilização Aprimorada) */
-    section {
-      min-height: 100vh;
-      background-color: var(--background-dark); /* Fundo base da seção */
-      padding: 80px 20px; /* Mais padding vertical */
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      border-bottom: 1px solid var(--border-color); /* Separador entre seções */
-      position: relative; /* Para pseudo-elementos de fundo */
-      overflow: hidden; /* Garante que o pseudo-elemento não vaze */
-    }
+.sticky-nav ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  gap: 20px;
+}
 
-    /* Pseudo-elementos para adicionar padrões sutis */
-    section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0.03; /* Opacidade bem baixa para sutileza */
-      z-index: 0;
-      background-size: cover;
-      background-position: center;
-      pointer-events: none; /* Não interfere com cliques */
-    }
+.sticky-nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  transition: all 0.2s steps(4);
+}
 
-    #sobre-mim::before {
-      background-image: url('https://placehold.co/1920x1080/0d1117/161b22?text=Abstract+Code+Pattern'); /* */
-      background-size: 200px; /* Padrão repetitivo menor */
-      opacity: 0.02;
-    }
+.sticky-nav a:hover {
+  color: var(--accent-pink);
+  border-bottom: 2px solid var(--accent-pink);
+  text-shadow: 0 0 5px rgba(255, 0, 85, 0.5);
+}
 
-    #habilidades::before {
-      background-image: url('https://placehold.co/1920x1080/0d1117/161b22?text=Circuit+Board+Pattern'); /* */
-      background-size: 300px;
-      opacity: 0.02;
-    }
+/* SEÇÃO SOBRE MIM (SLIDE DECK) */
+#sobre-mim {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  background: linear-gradient(135deg, #0b071a 0%, #170f2c 40%, #2a1142 80%, #1a0933 100%);
+  transition: background 1.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 3px solid var(--border-color);
+  overflow: hidden;
+}
 
-    #projetos::before {
-      background-image: url('https://placehold.co/1920x1080/0d1117/161b22?text=Geometric+Shapes+Pattern'); /* */
-      background-size: 250px;
-      opacity: 0.02;
-    }
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    /* Nova seção para Links Úteis/Conecte-se */
-    #links-uteis::before {
-      background-image: url('https://placehold.co/1920x1080/161b22/0d1117?text=Social+Connections'); /* */
-      background-size: cover;
-      opacity: 0.05;
-    }
+.slide.active {
+  opacity: 1;
+  visibility: visible;
+}
 
-    section .container {
-      position: relative; /* Garante que o conteúdo fique acima do pseudo-elemento */
-      z-index: 1;
-    }
+.slide-content {
+  max-width: 680px;
+  width: 85%;
+  padding: 30px;
+  background: var(--panel-bg);
+  border: 2px solid var(--border-color);
+  box-shadow: 0 0 25px rgba(157, 78, 221, 0.2);
+  backdrop-filter: blur(4px);
+  z-index: 5;
+}
 
-    section h2 {
-      font-size: 2.5rem; /* Aumenta o tamanho do título */
-      color: var(--primary-color);
-      margin-bottom: 30px; /* Mais espaço abaixo do título */
-      border-bottom: 3px solid var(--accent-color); /* Borda mais grossa e com cor de acento */
-      padding-bottom: 15px;
-      font-weight: 700;
-      text-align: center; /* Centraliza o título */
-      text-transform: uppercase; /* Texto em maiúsculas */
-      letter-spacing: 2px; /* Espaçamento entre letras */
-      position: relative;
-    }
+.slide-content h2 {
+  font-size: 1.4rem;
+  color: var(--accent-cyan);
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
 
-    section h2::after { /* Elemento decorativo abaixo do título */
-      content: '';
-      display: block;
-      width: 60px;
-      height: 3px;
-      background-color: var(--primary-color);
-      margin: 10px auto 0;
-      border-radius: 5px;
-    }
+.slide-content p {
+  font-size: 1rem;
+  color: var(--text-muted);
+  text-align: justify;
+}
 
-    section p {
-      font-size: 1.1rem;
-      color: var(--secondary-color);
-      max-width: 900px; /* Aumenta a largura máxima do parágrafo */
-      margin: 0 auto 20px auto; /* Centraliza e adiciona margem inferior */
-      text-align: justify; /* Justifica o texto */
-    }
+/* BACKDROP GRAPHICS */
+.pixel-graphic {
+  position: absolute;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.15;
+  filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.3));
+  transition: all 1s ease-in-out;
+  pointer-events: none;
+}
 
-    /* Habilidades */
-    #habilidades ul {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center; /* Centraliza os itens */
-      gap: 15px; /* Aumenta o espaçamento */
-      margin-top: 30px; /* Mais espaço acima da lista */
-      padding-left: 0;
-    }
+#slide1 .pixel-graphic { top: 10%; right: 10%; width: 200px; height: 200px; }
+#slide2 .pixel-graphic { bottom: 12%; left: 8%; width: 220px; height: 220px; }
+#slide3 .pixel-graphic { top: 8%; left: 8%; width: 180px; height: 180px; }
+#slide4 .pixel-graphic { bottom: 10%; right: 8%; width: 240px; height: 240px; }
 
-    #habilidades li {
-      background-color: var(--background-light);
-      color: var(--primary-color);
-      padding: 12px 20px; /* Mais padding */
-      border-radius: 25px; /* Mais arredondado (pill shape) */
-      font-weight: 600;
-      border: 1px solid var(--border-color);
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 5px var(--shadow-light);
-      display: flex; /* Para alinhar ícone e texto */
-      align-items: center; /* Centraliza verticalmente */
-      gap: 8px; /* Espaçamento entre ícone e texto */
-    }
+.icon-crt { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="%239d4ede"><rect x="10" y="10" width="80" height="60" rx="2" stroke="%239d4ede" stroke-width="4" fill="none"/><rect x="18" y="16" width="64" height="48" fill="%232a1142"/><line x1="30" y1="70" x2="15" y2="90" stroke="%239d4ede" stroke-width="5"/><line x1="70" y1="70" x2="85" y2="90" stroke="%239d4ede" stroke-width="5"/><line x1="15" y1="90" x2="85" y2="90" stroke="%239d4ede" stroke-width="5"/></svg>'); }
+.icon-maze { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="%23ff0055"><path d="M0,10 H100 M0,30 H100 M0,50 H100 M0,70 H100 M0,90 H100 M10,10 V30 M40,10 V30 M70,10 V30 M25,30 V50 M55,30 V50 M85,30 V50 M15,50 V70 M45,50 V70 M75,50 V70" stroke="%23ff0055" stroke-width="5"/></svg>'); }
+.icon-hourglass { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="%2300f0ff"><path d="M25,15 H75 V32 L54,50 L75,68 V85 H25 V68 L46,50 L25,32 Z" stroke="%2300f0ff" stroke-width="5" fill="none"/><path d="M32,22 H68 L50,45 Z M50,55 L68,78 H32 Z" fill="%2300f0ff"/></svg>'); }
+.icon-terminal { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="%2300ff66"><path d="M20,25 L50,50 L20,75" stroke="%2300ff66" stroke-width="6" fill="none" stroke-linecap="square"/><rect x="55" y="68" width="30" height="7" fill="%2300ff66"/></svg>'); }
 
-    #habilidades li:hover {
-      background-color: var(--primary-color);
-      color: var(--background-dark);
-      cursor: pointer; /* Indica que é clicável (embora não tenha ação) */
-      transform: translateY(-3px) scale(1.02); /* Pequeno efeito de elevação */
-      box-shadow: 0 5px 15px var(--shadow-medium);
-    }
+/* CONTROLES DO SLIDE */
+/* .slide-controls {
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 15;
+}
 
-    /* Estilo para os ícones dentro das habilidades */
-    #habilidades li i {
-      font-size: 1.2em; /* Ajusta o tamanho do ícone */
-      color: var(--accent-color); /* Cor de acento para os ícones */
-    }
+.btn-group { display: flex; gap: 15px; }
 
-    #habilidades li:hover i {
-      color: var(--background-dark); /* Cor do ícone no hover */
-    }
+.pixel-btn {
+  background: transparent;
+  border: 2px solid var(--accent-pink);
+  color: var(--accent-pink);
+  padding: 8px 16px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.2s steps(4);
+}
+
+.pixel-btn:hover {
+  background: var(--accent-pink);
+  color: #0b071a;
+  box-shadow: 0 0 10px rgba(255, 0, 85, 0.6);
+}
+
+.pixel-btn:disabled {
+  border-color: #4a3b5c;
+  color: #4a3b5c;
+  cursor: not-allowed;
+  box-shadow: none;
+  background: transparent;
+} */
 
 
-    /* Estilos para a simulação de IDE */
-    .code-simulation-wrapper {
-      background-color: #1e1e1e; /* Cor de fundo de IDE */
-      border-radius: 0.5rem;
-      overflow: hidden;
-      margin: 2rem auto;
-      min-width: 100%; /* Ocupa 80% da largura da tela */
-      max-width: 100%; /* Largura máxima fixa */
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-      border: 1px solid var(--border-color);
-    }
 
-    .code-header {
-      display: flex;
-      padding: 0.75rem;
-      background-color: #333;
-      border-bottom: 1px solid #444;
-      gap: 0.5rem;
-    }
 
-    .code-header span {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-    }
+#sobre-mim {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  background: linear-gradient(135deg, #0b071a 0%, #170f2c 40%, #2a1142 80%, #1a0933 100%);
+  transition: background 1.2s ease-in-out;
+  display: flex;
+  flex-direction: row; /* Alinha Setas e Caixa de Texto lado a lado */
+  justify-content: center;
+  align-items: center;
+  border-bottom: 3px solid var(--border-color);
+  overflow: hidden;
+  padding: 0 40px;
+  gap: 25px;
+}
 
-    .code-header span:nth-child(1) { background-color: #ff5f56; } /* Red */
-    .code-header span:nth-child(2) { background-color: #ffbd2e; } /* Yellow */
-    .code-header span:nth-child(3) { background-color: #27c93f; } /* Green */
+.slides-container {
+  flex: 1;
+  max-width: 680px;
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    pre {
-      margin: 0;
-      padding: 1.5rem;
-      text-align: left;
-      white-space: pre-wrap; /* Permite quebras de linha */
-      word-wrap: break-word; /* Quebra palavras longas */
-      font-family: 'Fira Code', 'Cascadia Code', monospace; /* Fonte de código */
-      font-size: 1rem;
-      color: #d4d4d4; /* Cor de texto mais clara para o código (VS Code like) */
-      min-height: 200px; /* Altura mínima */
-      max-height: 400px; /* Altura máxima fixa */
-      overflow-y: auto; /* Adiciona scroll se o conteúdo exceder a altura máxima */
-      background-color: #1e1e1e; /* Mesma cor de fundo do wrapper */
-      position: relative;
-    }
+.pixel-arrow {
+  background: transparent;
+  border: 2px solid var(--accent-green);
+  color: var(--accent-green);
+  
+  /* Estilo do Texto/Seta */
+  font-family: 'Courier New', Courier, monospace; /* Garante visual retrô estável */
+  font-size: 1.6rem;
+  font-weight: bold;
+  
+  width: 46px;
+  height: 46px;
+  cursor: pointer;
+  
+  /* Centralização perfeita do caractere */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding-bottom: 4px; /* Ajuste sutil para alinhar verticalmente o texto < e > */
+  
+  z-index: 20;
+  transition: all 0.15s steps(4);
+}
 
-    /* Estilo para as linhas de comentário no código */
-    pre code .comment {
-      color: #6a9955; /* Cor verde para comentários (VS Code like) */
-    }
+/* Customização de Cores da Seta Esquerda */
+.arrow-left {
+  border-color: var(--accent-pink);
+  color: var(--accent-pink);
+}
 
-    /* Estilo para palavras-chave (ex: function, return, console) */
-    pre code .keyword {
-      color: #569cd6; /* Cor azul para palavras-chave (VS Code like) */
-    }
+/* HOVERS (Troca a cor de fundo e do texto ao passar o mouse) */
+.arrow-left:hover:not(:disabled) {
+  background: var(--accent-pink);
+  color: #0b071a;
+  box-shadow: 0 0 10px rgba(255, 0, 85, 0.4);
+}
 
-    /* Estilo para nomes de funções/variáveis */
-    pre code .function-name {
-        color: #dcdcaa; /* Cor amarela para nomes de funções (VS Code like) */
-    }
+.arrow-right:hover:not(:disabled) {
+  background: var(--accent-green);
+  color: #0b071a;
+  box-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
+}
 
-    /* Estilo para strings */
-    pre code .string {
-      color: #ce9178; /* Cor laranja para strings (VS Code like) */
-    }
+/* ESTADO DESABILITADO (Seta apaga se não puder clicar) */
+.pixel-arrow:disabled {
+  border-color: #3d2f4d;
+  color: #3d2f4d;
+  cursor: not-allowed;
+  background: transparent !important;
+  box-shadow: none !important;
+}
 
-    /* Estilo para números/literais */
-    pre code .number {
-      color: #b5cea8; /* Cor verde claro para números (VS Code like) */
-    }
+/* Ajuste específico para o símbolo de reload não ficar desalinhado */
+.pixel-arrow.reload-active {
+  font-size: 1.8rem;
+  padding-bottom: 2px;
+}
 
-    code {
-      display: block;
-    }
+/* INDICADORES INFERIORES CENTRALIZADOS */
+.dots-container-bottom {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 15;
+}
 
-    /* Cursor piscante */
-    code.typing-cursor::after {
-      content: '|'; /* O caractere do cursor */
-      display: inline-block;
-      animation: blink-caret 0.75s step-end infinite;
-      color: var(--accent-color);
-      margin-left: 2px; /* Pequeno espaço entre o texto e o cursor */
-    }
+/* RESPONSIVIDADE MOBILE */
+@media (max-width: 768px) {
+  #sobre-mim {
+    flex-direction: column;
+    padding: 40px 15px;
+    height: 640px;
+    gap: 15px;
+  }
+  
+  .slides-container {
+    width: 100%;
+    height: auto;
+  }
+  
+  .pixel-arrow {
+    position: absolute;
+    bottom: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  
+  .arrow-left { left: 20px; }
+  .arrow-right { right: 20px; }
+  
+  .dots-container-bottom {
+    bottom: 30px;
+  }
+}
 
-    @keyframes blink-caret {
-      from, to { opacity: 0; }
-      50% { opacity: 1; }
-    }
 
-    /* Status de compilação */
-    .compilation-status {
-      margin-top: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      opacity: 0; /* Inicialmente invisível */
-      transition: opacity 1s ease-in-out;
-    }
 
-    .compilation-status.visible {
-      opacity: 1;
-    }
+#nextBtn { border-color: var(--accent-green); color: var(--accent-green); }
+#nextBtn:hover { background: var(--accent-green); color: #0b071a; box-shadow: 0 0 10px rgba(0, 255, 102, 0.6); }
 
-    .gear-icon {
-      width: 60px;
-      height: 60px;
-      margin-bottom: 1rem;
-      animation: spin 4s linear infinite;
-      color: var(--accent-color); /* Cor de acento para a engrenagem */
-    }
+/* .dots-container { display: flex; gap: 8px; } */
+.dot { width: 8px; height: 8px; background: #3d2963; }
+.dot.active { background: var(--accent-cyan); box-shadow: 0 0 8px var(--accent-cyan); }
 
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
+/* SEÇÕES COMUNS */
+section {
+  padding: 60px 0;
+  border-bottom: 2px solid var(--border-color);
+}
 
-    #status-text {
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: var(--primary-color);
-    }
+section h2 {
+  font-size: 1.6rem;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+  border-left: 4px solid var(--accent-pink);
+  padding-left: 15px;
+}
 
-    /* Responsividade */
-    @media (max-width: 768px) {
-      section {
-        padding: 2rem 1rem;
-      }
-      h2 {
-        font-size: 1.8rem;
-      }
-      pre {
-        padding: 1rem;
-        font-size: 0.9rem;
-        max-height: 300px; /* Ajuste para telas menores */
-      }
-      .gear-icon {
-        width: 50px;
-        height: 50px;
-      }
-      #status-text {
-        font-size: 1.2rem;
-      }
-    }
+/* HABILIDADES */
+#habilidades ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 15px;
+  list-style: none;
+}
 
-    @media (max-width: 480px) {
-      h2 {
-        font-size: 1.5rem;
-      }
-      pre {
-        font-size: 0.8rem;
-        max-height: 250px; /* Ajuste para telas muito pequenas */
-      }
-      .gear-icon {
-        width: 40px;
-        height: 40px;
-      }
-      #status-text {
-        font-size: 1rem;
-      }
-    }
+#habilidades li {
+  background: rgba(23, 15, 44, 0.6);
+  border: 1px solid var(--border-color);
+  padding: 12px;
+  text-align: center;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
 
-    /* Informações Extras (Aside) */
-    aside {
-      background-color: var(--background-dark); /* Usar background-dark para consistência com o tema */
-      color: var(--text-light);
-      padding: 40px;
-      margin-top: 30px; /* Adiciona margem superior para separar da seção anterior */
-      border-radius: 12px;
-      box-shadow: 0 4px 12px var(--shadow-medium);
-      text-align: center;
-      border: 1px solid var(--border-color);
-      position: relative; /* Para o pseudo-elemento de fundo */
-      overflow: hidden;
-    }
+#habilidades li:hover {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+  transform: translateY(-2px);
+}
 
-    aside::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('https://placehold.co/1920x1080/161b22/0d1117?text=Social+Connections'); /* */
-      background-size: cover;
-      background-position: center;
-      opacity: 0.05; /* Opacidade sutil */
-      z-index: 0;
-      pointer-events: none;
-    }
+#habilidades i {
+  display: block;
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+  color: var(--text-muted);
+}
 
-    aside > * {
-      position: relative;
-      z-index: 1;
-    }
+#habilidades li:hover i { color: var(--accent-cyan); }
 
-    aside h3 {
-      font-size: 2.2rem;
-      margin-bottom: 20px;
-      font-weight: 700;
-      color: var(--primary-color); /* Cor de destaque */
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-    }
+/* TERMINAL DE PROJETOS */
+.code-simulation-wrapper {
+  background: #0d091a;
+  border: 2px solid var(--border-color);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
 
-    aside p {
-      font-size: 1.1rem;
-      margin-bottom: 25px;
-      line-height: 1.8;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-      color: var(--secondary-color);
-    }
+.code-header {
+  background: #170f2c;
+  padding: 10px;
+  display: flex;
+  gap: 6px;
+  border-bottom: 1px solid var(--border-color);
+}
 
-    aside ul {
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      padding-left: 0;
-    }
+.code-header span { width: 10px; height: 10px; border-radius: 50%; background: #ff5f56; }
+.code-header span:nth-child(2) { background: #ffbd2e; }
+.code-header span:nth-child(3) { background: #27c93f; }
 
-    aside li {
-      display: inline-block;
-    }
+pre { padding: 20px; overflow-x: auto; }
+code { color: var(--accent-green); font-size: 0.95rem; }
 
-    aside a {
-      color: var(--text-dark); /* Texto mais claro para os links */
-      text-decoration: none;
-      background-color: var(--primary-color); /* Cor principal para o fundo do botão */
-      padding: 12px 25px;
-      border-radius: 8px;
-      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-      font-weight: 600;
-      box-shadow: 0 2px 5px var(--shadow-medium);
-      display: flex; /* Para alinhar ícone e texto */
-      align-items: center;
-      gap: 8px; /* Espaçamento entre ícone e texto */
-    }
+.compilation-status { display: flex; align-items: center; gap: 10px; color: var(--text-muted); font-size: 0.9rem; }
+.gear-icon { width: 18px; height: 18px; animation: spin 3s linear infinite; color: var(--accent-cyan); }
+@keyframes spin { 100% { transform: rotate(360deg); } }
 
-    aside a:hover,
-    aside a:focus {
-      background-color: var(--accent-color); /* Cor de acento no hover */
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px var(--shadow-medium);
-      outline: none;
-    }
 
-    /* Estilo para os ícones dentro dos links */
-    aside a i {
-      font-size: 1.2em; /* Ajusta o tamanho do ícone */
-    }
+@keyframes scanline {
+  0% {
+    background-position: 0% -100%;
+  }
+  100% {
+    background-position: 0% 100%;
+  }
+}
 
-    /* Rodapé */
-    footer {
-      background-color: var(--background-dark);
-      text-align: center;
-      padding: 30px 10px;
-      font-size: 0.9rem;
-      color: var(--secondary-color);
-      border-top: 1px solid var(--border-color);
-      box-shadow: 0 -4px 15px var(--shadow-medium);
-    }
+/* ASIDE */
+aside { padding: 40px 0; background: #0d091a; text-align: center; border-bottom: 2px solid var(--border-color); }
+aside h3 { font-size: 1.2rem; text-transform: uppercase; margin-bottom: 20px; color: var(--accent-cyan); }
+aside ul { display: flex; justify-content: center; gap: 30px; list-style: none; }
+aside a { color: var(--text-main); text-decoration: none; font-size: 1.1rem; border: 1px solid var(--border-color); padding: 10px 20px; transition: all 0.2s steps(4); }
+aside a:hover { border-color: var(--accent-pink); color: var(--accent-pink); box-shadow: 0 0 10px rgba(255, 0, 85, 0.3); }
 
-    footer p {
-      margin-bottom: 5px;
-    }
+/* FOOTER */
+footer { background: #06040d; padding: 30px 20px; text-align: center; font-size: 0.85rem; color: var(--text-muted); }
+footer p { margin-bottom: 5px; }
 
-    /* Responsividade */
-    @media (max-width: 768px) {
-      header h1 {
-        font-size: 2.2rem;
-      }
-      header q {
-        font-size: 1rem;
-      }
-      .sticky-nav ul {
-        flex-direction: column;
-        gap: 10px;
-      }
-      .sticky-nav a {
-        padding: 10px;
-      }
-      section {
-        padding: 60px 15px; /* Ajusta padding para telas menores */
-      }
-      section h2 {
-        font-size: 2rem;
-      }
-      section p {
-        font-size: 1rem;
-      }
-      #habilidades ul {
-        gap: 10px;
-      }
-      #habilidades li {
-        padding: 10px 15px;
-      }
-      aside {
-        padding: 30px 20px;
-      }
-      aside h3 {
-        font-size: 1.8rem;
-      }
-      aside p {
-        font-size: 1rem;
-      }
-      aside ul {
-        flex-direction: column;
-        gap: 15px;
-      }
-      aside a {
-        padding: 10px 20px;
-        justify-content: center; /* Centraliza o conteúdo do botão */
-      }
-    }
-
-    @media (max-width: 480px) {
-      header h1 {
-        font-size: 1.8rem;
-      }
-      header img {
-        width: 120px;
-        height: 120px;
-      }
-      .sticky-nav {
-        padding: 8px 0;
-      }
-      .sticky-nav a {
-        padding: 8px 10px;
-      }
-      section h2 {
-        font-size: 1.8rem;
-      }
-      section p {
-        font-size: 0.95rem;
-      }
-      #habilidades li {
-        padding: 8px 12px;
-      }
-      aside {
-        padding: 25px 15px;
-      }
-      aside h3 {
-        font-size: 1.6rem;
-      }
-      aside p {
-        font-size: 0.9rem;
-      }
-      aside a {
-        padding: 8px 15px;
-      }
-    }
+/* MOBILE BREAKPOINTS */
+@media (max-width: 768px) {
+  #sobre-mim { height: 520px; }
+  .pixel-graphic { width: 120px !important; height: 120px !important; opacity: 0.08; }
+  #habilidades ul { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+}

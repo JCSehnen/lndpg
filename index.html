@@ -4,17 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>José Claudio Sehnen Pinheiro - Desenvolvedor</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Courier+New:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <!-- Font Awesome para os ícones -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="style.css">
-  <script src="./script.js" defer></script> <!-- Adicionado 'defer' para garantir que o HTML seja carregado primeiro -->
+  <script src="script.js" defer></script>
 </head>
 <body>
 
   <header>
-    <!-- O atributo onerror exibe um placeholder se a imagem principal não carregar, ajudando a depurar -->
-    <img src="./profile.jpeg" alt="Foto de José Claudio Sehnen Pinheiro" onerror="this.onerror=null; this.src='https://placehold.co/160x160/58a6ff/0d1117?text=Foto+Invalida';">
+    <!-- Contêiner wrapper para aplicar o efeito Game Boy na foto -->
+    <div class="avatar-gameboy">
+      <img src="./profile.jpeg" alt="Foto de José Claudio Sehnen Pinheiro" onerror="this.onerror=null; this.src='https://placehold.co/160x160/58a6ff/0d1117?text=Foto+Invalida';">
+    </div>
     <h1>José Claudio Sehnen Pinheiro</h1>
     <q>Entre cabos e códigos, transformo complexidade em soluções elegantes.</q>
   </header>
@@ -31,18 +33,90 @@
   </nav>
 
   <main>
+    <!-- Seção Sobre Mim em formato Storytelling Pixelado -->
+
+
+    <!-- Seção Sobre Mim - Setas Simples -->
     <section id="sobre-mim">
-      <div class="container">
-        <h2>Sobre Mim</h2>
-        <p>Sou desenvolvedor web com experiência em infraestrutura, redes e suporte técnico. Trabalho com foco em entregar soluções funcionais, elegantes e acessíveis para usuários e empresas.</p>
-        <p>Tenho domínio de tecnologias modernas como JavaScript, APIs REST, bancos de dados, Linux, Windows e versionamento com Git.</p>
-      </div>
+        
+        <!-- Seta Esquerda Simples -->
+        <button class="pixel-arrow arrow-left" id="prevBtn" disabled aria-label="Slide anterior">&lt;</button>
+
+        <!-- Container Central dos Slides (Mantém os slides com os textos como estão) -->
+       <div class="slides-container">
+            <!-- Slide 1 -->
+            <div class="slide active" id="slide1">
+                <div class="pixel-graphic icon-crt"></div>
+                <div class="slide-content">
+                    <h2>O Portal de Tijolos Vermelhos</h2>
+                    <p>No início dos anos 2000, computadores ainda pareciam itens raros, confinados a espaços quase sagrados: o escritório silencioso de um adulto, a recepção de uma empresa ou a mesa desorganizada de um primo mais velho. Eles não faziam parte do cotidiano, eram um acontecimento</p>
+                    <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">Entrar nesses ambientes significava perceber outra atmosfera. O ar frio dos ventiladores barulhentos misturava-se ao cheiro de papel, plástico aquecido e café velho. No centro de tudo, o monitor CRT brilhava com seu vidro curvado e zumbido agudo, feito uma janela aberta para outro mundo. Até que o sistema ficava ocioso, a tela escurecia e o labirinto começava.</p>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide" id="slide2">
+                <div class="pixel-graphic icon-maze"></div>
+                <div class="slide-content">
+                    <h2>A Coisa Viva Dentro do Computador</h2>
+                    <p>Eu não sabia o que era um protetor de tela, muito menos computação gráfica. Sem referências como Doom ou Wolfenstein 3D na cabeça, o computador era tão distante da minha realidade que ver aquela câmera explorando corredores infinitos de tijolos vermelhos parecia inteligência genuína.</p>
+                    <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">Para mim, aquilo não era software; era uma criatura viva, uma presença presa nos circuitos tateando paredes em busca de liberdade. Cada curva parecia uma decisão real e cada beco sem saída transmitia hesitação. Era o verdadeiro estado da magia tecnológica: quando ainda não existe vocabulário suficiente para destruir o mistério.</p>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide" id="slide3">
+                <div class="pixel-graphic icon-hourglass"></div>
+                <div class="slide-content">
+                    <h2>Esperando o Impossível</h2>
+                    <p>Eu não queria jogar, queria apenas assistir. Ficava estático diante da tela, acompanhando o percurso em silêncio e torcendo para que a criatura encontrasse a saída. Acreditava piamente que o labirinto terminaria e que, se eu tivesse paciência suficiente, testemunharia o momento histórico da fuga.</p>
+                    <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">Hoje entendo que o espaço era procedural, gerado matematicamente em loops infinitos. Não havia consciência, só algoritmos. Mas existe uma diferença brutal entre entender a técnica e experienciar o fenômeno pela primeira vez. Onde a ciência colocava lógica e matrizes de 16 cores, a criança enxergava mistério puro.</p>
+                </div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="slide" id="slide4">
+                <div class="pixel-graphic icon-terminal"></div>
+                <div class="slide-content">
+                    <h2>O Que Existia Atrás das Paredes</h2>
+                    <p>Anos depois, trabalhando com tecnologia, percebi que desvendar a mecânica não destrói o encanto, apenas muda a admiração. Hoje vejo a matemática invisível que sustentava aqueles corredores, as texturas de baixa resolução e os truques engenhosos usados para contornar as limitações de hardware da época.</p>
+                    <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">Ainda assim, reconheço que meu fascínio não nasceu do entendimento, mas da estranheza. Da impressão quase espiritual de observar uma máquina realizando algo que eu não conseguia explicar. Minha relação com a tecnologia começou exatamente ali: não como uma ferramenta de trabalho, mas como um mistério a ser desvendado.</p>
+                </div>
+            </div>
+
+            <!-- Slide 5 (Texto mantido na proporção original perfeita) -->
+            <div class="slide" id="slide5">
+                <div class="pixel-graphic icon-terminal" style="filter: hue-rotate(90deg);"></div>
+                <div class="slide-content">
+                    <h2>Os Labirintos de Hoje</h2>
+                    <p>Existe algo poeticamente inevitável nisso tudo. Anos depois, eu acabaria entrando justamente no mundo que existia escondido atrás daquela tela. Redes, infraestrutura, integrações, sistemas, lógica, troubleshooting — todos eles também são labirintos. Só que invisíveis.</p>
+                    <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">Hoje eu passo meus dias navegando por caminhos complexos, procurando falhas, entendendo fluxos, conectando estruturas. Resolvo problemas que, para quem observa de fora, também parecem mágicos. E às vezes penso naquela criança parada em algum escritório silencioso do começo dos anos 2000, encarando um monitor CRT como quem observa um portal aberto. Ela não sabia o que era código, algoritmo ou computação. Mas já estava sendo puxada para dentro do labirinto.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seta Direita Simples -->
+        <button class="pixel-arrow arrow-right" id="nextBtn" aria-label="Próximo slide">&gt;</button>
+
+        <!-- Indicadores Inferiores -->
+        <div class="dots-container-bottom">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
     </section>
+
+   
 
     <section id="habilidades">
       <div class="container">
         <h2>Habilidades</h2>
         <ul>
+          <li><i class="fas fa-network-wired"></i> Cisco</li>
+          <li><i class="fas fa-route"></i> Redes</li>
+          <li><i class="fas fa-server"></i> Datacenter</li>
           <li><i class="fab fa-html5"></i> HTML5</li>
           <li><i class="fab fa-css3-alt"></i> CSS3</li>
           <li><i class="fab fa-js"></i> JavaScript</li>
@@ -54,8 +128,8 @@
           <li><i class="fas fa-chart-line"></i> Chart.js</li>
           <li><i class="fas fa-code"></i> TypeScript (TS)</li>
           <li><i class="fab fa-node-js"></i> Node.js</li>
-          <li><i class="fas fa-cubes"></i> Nest.js</li> <!-- Ícone genérico para Nest.js -->
-          <li><i class="fas fa-laptop-code"></i> Express.js</li> <!-- Ícone genérico para Express.js -->
+          <li><i class="fas fa-cubes"></i> Nest.js</li>
+          <li><i class="fas fa-laptop-code"></i> Express.js</li>
           <li><i class="fab fa-docker"></i> Docker</li>
           <li><i class="fas fa-paper-plane"></i> Postman</li>
           <li><i class="fas fa-database"></i> Banco de Dados</li>
@@ -68,30 +142,30 @@
       </div>
     </section>
 
-   <section id="projetos">
-      <div class="container">
-        <h2>Projetos</h2>
+ <section id="projetos">
+  <div class="container">
+    <h2>Projetos</h2>
 
-        <div class="code-simulation-wrapper">
-          <div class="code-header">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <pre><code id="code-output"></code></pre>
-        </div>
-
-        <div class="compilation-status">
-          <svg class="gear-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.837-2.765.6-1.487 1.857a1.532 1.532 0 01-.948 2.286c-1.56.38-1.56 2.6 0 2.98a1.532 1.532 0 01.948 2.286c-.837 1.372.6 2.765 1.857 1.487a1.532 1.532 0 012.286.948c.38 1.56 2.6 1.56 2.98 0a1.532 1.532 0 012.286-.948c1.372.837 2.765-.6 1.487-1.857a1.532 1.532 0 01.948-2.286c1.56-.38 1.56-2.6 0-2.98a1.532 1.532 0 01-.948-2.286c.837-1.372-.6-2.765-1.857-1.487a1.532 1.532 0 01-2.286-.948zM10 11a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
-          </svg>
-          <p id="status-text"></p>
-        </div>
-
+    <div class="code-simulation-wrapper">
+      <div class="code-header">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
-    </section>
+      <!-- O ID ABAIXO PRECISA ESTAR EXATAMENTE ASSIM -->
+      <pre><code id="code-output"></code></pre>
+    </div>
 
-    <!-- Seção de Links Úteis/Conecte-se -->
+    <div class="compilation-status">
+      <svg class="gear-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.837-2.765.6-1.487 1.857a1.532 1.532 0 01-.948 2.286c-1.56.38-1.56 2.6 0 2.98a1.532 1.532 0 01.948 2.286c-.837 1.372.6 2.765 1.857 1.487a1.532 1.532 0 012.286.948c.38 1.56 2.6 1.56 2.98 0a1.532 1.532 0 012.286-.948c1.372.837 2.765-.6 1.487-1.857a1.532 1.532 0 01.948-2.286c1.56-.38 1.56-2.6 0-2.98a1.532 1.532 0 01-.948-2.286c.837-1.372-.6-2.765-1.857-1.487a1.532 1.532 0 01-2.286-.948zM10 11a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
+      </svg>
+      <p id="status-text">Iniciando compilação...</p>
+    </div>
+
+  </div>
+</section>
+
     <aside id="links-uteis">
       <div class="container">
         <h3>Conecte-se Comigo</h3>
@@ -103,11 +177,11 @@
     </aside>
   </main>
 
-  <footer id="contato">
+  <footer>
     <div class="container">
       <p>Email: josesehnen@gmail.com</p>
       <p>Telefone: (45) 99824-6085</p>
-      <p>&copy; 2025 José Claudio Sehnen Pinheiro. Todos os direitos reservados.</p>
+      <p>&copy; 2026 José Claudio Sehnen Pinheiro. Todos os direitos reservados.</p>
     </div>
   </footer>
 
